@@ -6,7 +6,7 @@ import pyautogui
 
 # Variables de la maladie
 people = 200 # max 1920
-danger = 1000 #Une chance sur
+danger = 1 #Une chance sur
 vaccin = 2 #Une chance sur
 # Parametres
 xmax = people
@@ -33,7 +33,7 @@ def gen_virus():
         for x in range(0, xmax*lenthx, lenthx):
             if x == xmax//2 and y == ymax//2 :
                 pygame.draw.rect(humain, RED, (x,y,lenthx,lenthy))
-            elif randint(0,100)%vaccin == 0 :
+            elif randint(0,vaccin) == 0 :
                 pygame.draw.rect(humain, BLUE, (x,y,lenthx,lenthy))
             else :
                 pygame.draw.rect(humain, GREEN, (x,y,lenthx,lenthy))
@@ -48,7 +48,7 @@ def check_virus():
         for x in range(0, xmax*lenthx, lenthx):
             if humain.get_at((x, y)) == GREEN:
                 green = 1
-                if randint(0,100)%danger == 0:
+                if randint(0,danger) == 0:
                     pygame.draw.rect(humain, RED, (x,y,lenthx,lenthy))
     screen.blit(humain,(0,0))
     pygame.display.update()
