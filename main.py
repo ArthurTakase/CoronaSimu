@@ -6,7 +6,7 @@ import pyautogui
 
 # Variables de la maladie
 people = 200 # max 1920
-danger = 1 #Une chance sur
+danger = 10 #Une chance sur
 vaccin = 2 #Une chance sur
 # Parametres
 xmax = people
