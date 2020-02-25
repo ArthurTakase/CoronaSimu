@@ -15,6 +15,8 @@ screen_size = pyautogui.size()
 height, width = screen_size[1]-(screen_size[1]%ymax), screen_size[0]-(screen_size[0]%xmax)
 lenthx = width//xmax
 lenthy = height//ymax
+# Autre
+is_dead = True
 # Couleurs
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -43,6 +45,7 @@ def gen_virus():
 
 def check_virus():
     """Détéction des individus contaminés."""
+    global is_dead
     green = 0
     for y in range(0, ymax*lenthy, lenthy):
         for x in range(0, xmax*lenthx, lenthx):
@@ -53,10 +56,9 @@ def check_virus():
     screen.blit(humain,(0,0))
     pygame.display.update()
                     #time.sleep(0.01)
-
     if green == 0:
-        pygame.quit()
-        quit()
+        is_dead = False
+        return
 
 gen_virus()
 while True :
@@ -68,5 +70,6 @@ while True :
             if event.key == K_r: #Nouvelle simu
                 gen_virus()
             if event.key == K_SPACE:
-                while True:
+                is_dead = True
+                while is_dead:
                     check_virus()
