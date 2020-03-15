@@ -9,4 +9,5 @@ Pour lancer ce programme, vous pouvez utiliser **Python**, **Pygame** et **Pyaut
 
 ## Commandes
 Space = Lancer la maladie
+
 R = relancer une nouvelle session
