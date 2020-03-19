@@ -5,9 +5,9 @@ from pygame.locals import *
 import pyautogui
 
 # Variables de la maladie
-people = 250 # max 1920
-danger = 2 #Une chance sur
-gueri = 40 #Une chance sur
+people = 300 # max 1920
+danger = 10 #Une chance sur
+gueri = 999999999 #Une chance sur
 mort = 5 #Une chance sur
 vaccin = 2 #Une chance sur
 # Parametres
@@ -56,6 +56,18 @@ def check_border(x,y):
         except:
             continue
 
+def compte():
+    count = [0,0,0]
+    for y in range(0, ymax*lenthy, lenthy):
+        for x in range(0, xmax*lenthx, lenthx):
+            if humain.get_at((x, y)) == GREEN:
+                count[0] += 1
+            if humain.get_at((x, y)) == BLUE:
+                count[1] += 1
+            if humain.get_at((x, y)) == BLACK:
+                count[2] += 1
+    return count
+
 def check_virus():
     """Détection des individus contaminés."""
     global is_dead
@@ -63,7 +75,7 @@ def check_virus():
     for y in range(0, ymax*lenthy, lenthy):
         for x in range(0, xmax*lenthx, lenthx):
             if humain.get_at((x, y)) == GREEN:
-                action = 1
+                #action = 1
                 if check_border(x,y):
                     if randint(1,danger) == 1:
                         pygame.draw.rect(humain, RED, (x,y,lenthx,lenthy))
@@ -95,4 +107,5 @@ while True :
                     check_virus()
                     screen.blit(humain,(0,0))
                     pygame.display.update()
-                print("end")
+                good, immu, dead = compte()
+                print("good",good,"\nimmu",immu,"\ndead",dead,"\ntotal",dead+good+immu,"\n----------")
