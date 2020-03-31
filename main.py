@@ -3,14 +3,15 @@ from random import *
 import pygame
 from pygame.locals import *
 import pyautogui
+from result import *
 
 # Variables de la maladie
-people = 300 # max 1920
-danger = 10 #Une chance sur
-gueri = 999999999 #Une chance sur
-mort = 5 #Une chance sur
+people = 200 # max 1920
+danger = 2 #Une chance sur
+gueri = 10  #Une chance sur
+mort = 10 #Une chance sur
 vaccin = 2 #Une chance sur
-# Parametres
+#--------------------
 xmax = people
 ymax = int(people/2)+1
 screen_size = pyautogui.size()
@@ -18,7 +19,9 @@ height, width = screen_size[1]-(screen_size[1]%ymax), screen_size[0]-(screen_siz
 lenthx = width//xmax
 lenthy = height//ymax
 # Autre
-is_dead = True
+day = 1
+day_logs = []
+total = 0
 # Couleurs
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -27,9 +30,15 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 
 pygame.init()
+pygame.font.init()
 pygame.display.set_caption('CoronaSimu')
 screen = pygame.display.set_mode((width,height))
 humain = pygame.Surface((width, height))
+
+def text_draw(text, position, color, size):
+    myfont = pygame.font.SysFont('Arial', size)
+    textsurface = myfont.render(text, True, color)
+    screen.blit(textsurface,position)
 
 def gen_virus():
     """Génération des individus normaux, vaccinés et contaminés."""
@@ -56,16 +65,21 @@ def check_border(x,y):
         except:
             continue
 
-def compte():
-    count = [0,0,0]
+def compte(day):
+    global total
+    count = [day,0,0,0,0]
     for y in range(0, ymax*lenthy, lenthy):
         for x in range(0, xmax*lenthx, lenthx):
+            if day == 1 :
+                total +=1
             if humain.get_at((x, y)) == GREEN:
-                count[0] += 1
-            if humain.get_at((x, y)) == BLUE:
                 count[1] += 1
-            if humain.get_at((x, y)) == BLACK:
+            if humain.get_at((x, y)) == BLUE:
                 count[2] += 1
+            if humain.get_at((x, y)) == BLACK:
+                count[3] += 1
+            if humain.get_at((x,y)) == RED:
+                count[4] += 1
     return count
 
 def check_virus():
@@ -100,12 +114,18 @@ while True :
             quit()
         if event.type == pygame.KEYDOWN :
             if event.key == K_r: #Nouvelle simu
+                day_logs.clear()
+                day = 1
+                total = 0
                 gen_virus()
             if event.key == K_SPACE:
                 is_dead = True
                 while is_dead:
                     check_virus()
                     screen.blit(humain,(0,0))
+                    text_draw(str(day), (10,10), WHITE, 30)
+                    day_logs.append(compte(day))
                     pygame.display.update()
-                good, immu, dead = compte()
-                print("good",good,"\nimmu",immu,"\ndead",dead,"\ntotal",dead+good+immu,"\n----------")
+                    day += 1
+                day_logs.append(compte(day))
+                affiche_result(day_logs, total)
