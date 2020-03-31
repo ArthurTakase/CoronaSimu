@@ -1,4 +1,9 @@
 import matplotlib.pyplot as plt
+import numpy as np
+
+def func(pct, allvals):
+    absolute = int(pct/100.*np.sum(allvals))
+    return "{:.1f}%\n({:d})".format(pct, absolute)
 
 def affiche_result(logs, total):
     print(total)
@@ -22,9 +27,9 @@ def affiche_result(logs, total):
     plt.title("Recapitulatif par jour")
     plt.plot(days, immu, "b--", label="Immu")
     plt.plot(days, clean, "g--", label="Clean")
-    plt.plot(days, dead, "k", label="Dead")
-    plt.plot(days, bad, "r", label="Bad")
-    plt.plot(days, good, "c", label="Good")
+    plt.plot(days, dead, "k", label="Morts")
+    plt.plot(days, bad, "r", label="Malade")
+    plt.plot(days, good, "c", label="Vivant")
     plt.ylabel('Results')
     plt.xlabel('days')
     plt.legend()
@@ -34,13 +39,14 @@ def affiche_result(logs, total):
 
     name = [str(logs[len(logs)-1][2]), str(logs[len(logs)-1][3]), str(logs[len(logs)-1][1])]
     data = [logs[len(logs)-1][2], logs[len(logs)-1][3], logs[len(logs)-1][1]]
-    labels = ['Immu', 'Dead', 'Clean']
-    color = ['c', 'r', 'g']
+    labels = ['Immu', 'Mort', 'Clean']
+    color = ['b', 'k', 'g']
     explode = (0, 0.15, 0)
 
-    plt.pie(data, colors=color, explode=explode, labels=name, autopct='%1.1f%%', shadow=True)
+    plt.pie(data, colors=color, explode=explode, labels=name,
+            autopct=lambda pct: func(pct, data), shadow=True, textprops={'color':"w"})
     plt.legend(labels)
-    plt.title("Bilan de la simulation")
+    plt.title("Bilan de la simulation ("+str(total)+")")
     plt.show()
 
     #Clear
