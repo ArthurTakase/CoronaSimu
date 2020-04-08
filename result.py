@@ -1,9 +1,15 @@
+# ------------------------------------------------------------------------------
+# Projet : CoronaSimu, Simulation de propagation de maladies
+# Version : 1.0
+# Auteur : Arthur DECAEN
+# Fonction du fichier :  Affichage des resultats de la simulation.
+# ------------------------------------------------------------------------------
+
 import matplotlib.pyplot as plt
 import numpy as np
 from tkinter import *
 import pyautogui
 from random import randint
-from PIL import Image
 
 screen_size = pyautogui.size()
 
@@ -13,10 +19,6 @@ def func(pct, allvals):
 
 def affiche_result(logs, total, screen):
     plot1, plot2 = graph_result(logs, total, screen)
-    #window = Tk()
-
-    #img = Image.open('screen/simu'+str(screen)+'.png')
-    #img.show()
 
 def graph_result(logs, total, screen):
     # Graphique

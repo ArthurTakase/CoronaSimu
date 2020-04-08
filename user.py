@@ -1,3 +1,10 @@
+# ------------------------------------------------------------------------------
+# Projet : CoronaSimu, Simulation de propagation de maladies
+# Version : 1.0
+# Auteur : Arthur DECAEN
+# Fonction du fichier :  Fenetre de parametrage de la simulation.
+# ------------------------------------------------------------------------------
+
 from tkinter import *
 import pyautogui
 from random import randint
