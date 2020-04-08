@@ -178,7 +178,7 @@ def simu_start(day, screen, humain, user_choice):
     myScreenshot.save(r'screen\simu'+str(screen)+'.png')
 
     time.sleep(3)
-    affiche_result(day_logs, total, screen, user_choice)
+    affiche_result(day_logs, total, screen)
 
 
 # Initialisation
@@ -199,11 +199,7 @@ def main(user_choice):
     ymax = int(people/2)+1
     screen_size = pyautogui.size()
     height = screen_size[1]-(screen_size[1]%ymax-1)
-    if height > 1080 :
-        height = screen_size[1]-(screen_size[1]%ymax-2)
     width = screen_size[0]-(screen_size[0]%xmax-1)
-    if width > 1920 :
-        width = screen_size[0]-(screen_size[0]%xmax-2)
     lenthx = width//xmax
     lenthy = height//ymax
 
