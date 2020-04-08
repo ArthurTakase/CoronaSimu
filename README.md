@@ -15,7 +15,9 @@ Pour installer une bibliothèque, tapez les commandes suivantes dans un terminal
 > pip install matplotlib
 
 Installation automatique des bibliothèques :
-Pour installer plus facilement les bibliothèques, vous pouvez executer le fichier "launch_me_first.bat".
+Pour installer plus facilement les bibliothèques, vous pouvez executer le fichier "Install_lib.bat".
+
+Si vous êtes sous windows, vous pouvez lancer le .exe qui est fournis dans la release "Windows".
 
 ## Commandes
 Space = Lancer la maladie
