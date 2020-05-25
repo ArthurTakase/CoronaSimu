@@ -15,7 +15,7 @@ from result import *
 
 
 # Variables globales
-danger, people, danger, gueri, mort, vaccin = 0, 0, 0, 0, 0, 0
+danger, people, gueri, mort, vaccin = 0, 0, 0, 0, 0
 lenthx, lenthy = 0, 0
 xmax, ymax = 0, 0
 day = 0
